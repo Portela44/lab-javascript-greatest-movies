@@ -43,21 +43,99 @@ console.log(scoresAverage(movies));
 
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore(movies) {
-  
+function movieCount(movies, movieGenre){
+  counter = 0;
+  for(const obj of movies) {
+    if(obj.genre.includes(movieGenre)) {
+      counter++
+    }
+  }
+  return counter;
 }
 
+function dramaMoviesScore(movies, movieGenre) {
+  allScores = [];
+  for(const obj of movies) {
+    if(obj.genre.includes(movieGenre)) {
+      allScores.push(obj.score);
+    }
+  }
+  const totalScore = allScores.reduce(function (acc,val) {
+    return acc + val;
+  });
+  return ((totalScore/movieCount(movies, movieGenre)).toFixed(2));
+}
+
+console.log(dramaMoviesScore(movies, "Drama"));
+
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear() {}
+function orderByYear(movies) {
+  moviesCopy = structuredClone(movies);
+  orderedMovies = moviesCopy.sort(function (mov1, mov2) {
+    if (mov1.year > mov2.year) {
+      return -1;
+    } if (mov1.year < mov2.year) {
+      return 1;
+    } else {
+      if (mov1.title > mov2.title) {
+        return 1;
+      } if (mov1.title < mov2.title) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+  });
+  return orderedMovies;
+}
+
+console.log(orderByYear(movies));
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically() {}
+function orderByTitle (movies) {
+  moviesCopy = structuredClone(movies);
+  orderedMovies = moviesCopy.sort(function (mov1, mov2) {
+    if (mov1.title > mov2.title) {
+      return 1;
+    } if (mov1.title < mov2.title) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+  return orderedMovies;
+}
+
+function orderAlphabetically(movies, topX) {
+  top20MoviesAlphabetically = [];
+  orderedMovies = orderByTitle(movies);
+  for(let i = 0; i<movies.length; i++) {
+    if(i === topX) {
+      break;
+    } else {
+      top20MoviesAlphabetically.push(orderedMovies[i].title);
+    }
+  }
+  return top20MoviesAlphabetically;
+}
+
+console.log(orderAlphabetically(movies, 20));
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes() {}
+function turnHoursToMinutes(movies) {
+  const moviesReloaded = JSON.parse(JSON.stringify(movies));
+  for(let movie of moviesReloaded) {
+    movie.duration = Number(movie.duration.slice(0,1))*60 + Number(movie.duration.slice(3,5));
+  }
+  return moviesReloaded
+}
+
+console.log(turnHoursToMinutes(movies));
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg() {}
+function bestYearAvg(movies) {
+  
+}
 
 
 
