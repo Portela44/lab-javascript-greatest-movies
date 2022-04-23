@@ -133,9 +133,34 @@ function turnHoursToMinutes(movies) {
 console.log(turnHoursToMinutes(movies));
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg(movies) {
-  
+function moviesPerYear(movies) {
+  yearCountMovies = [];
+  for(let movie of movies) {
+    if (yearCountMovies.includes(movie.year)) {
+      yearCountMovies[movie.year].push(movie.score);
+    } else if (!(yearCountMovies.includes(movie.year))) {
+      yearCountMovies[movie.year] = [];
+      yearCountMovies[movie.year].push(movie.score);
+    }
+  }
+  console.log(typeof yearCountMovies);
+  return yearCountMovies;
 }
+
+console.log(moviesPerYear(movies));
+
+
+function bestYearAvg(movies) {
+  scorePerYear = [];
+  for(let movie of movies) {
+    
+  }
+  return scorePerYear;
+}
+
+//console.log(bestYearAvg(movies));
+
+
 
 
 
